@@ -383,7 +383,7 @@ namespace macho
 					io::stream_base::ptr buffer = debug_lines->load();
 					mDebugLines.reset(new dwarf::CDWARFDebugLine());
 					bool ret = mDebugLines->parse(buffer);
-					assert(ret);
+					//assert(ret);
 				}
 				/*CSection::Ptr sec_abbrev = segment->getSection(macho::CSection::kSECTION_DEBUG_ABBR);
 				CSection::Ptr sec_str = segment->getSection(macho::CSection::kSECTION_DEBUG_STR);

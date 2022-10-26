@@ -2,6 +2,7 @@
 #include <utility/CConsole.h>
 #include <io/stream_memory.h>
 #include <io/substream.h>
+#include <string.h>
 
 namespace macho
 {
@@ -100,7 +101,7 @@ namespace macho
 	{
 		if(!m_isloaded) {
 			base::ERESULT_CODE ret = preload();
-			assert(ret == base::ERESULT_CODE_SUCCESS);
+			//assert(ret == base::ERESULT_CODE_SUCCESS);
 			if(!base::is_successful_only(ret))
 			{
 				TRACE("[CSection (%s)] ERROR load",m_sec.c_str());
@@ -123,7 +124,7 @@ namespace macho
 	{
 		if(!m_isloaded) {
 			base::ERESULT_CODE ret = preload();
-			assert(ret == base::ERESULT_CODE_SUCCESS);
+			//assert(ret == base::ERESULT_CODE_SUCCESS);
 			if(!base::is_successful_only(ret))
 			{
 				TRACE("[CSection (%s)] ERROR read",m_sec.c_str());
@@ -148,7 +149,7 @@ namespace macho
 		if(!m_isloaded)
 		{
 			ret = preload();
-			assert(ret == base::ERESULT_CODE_SUCCESS);
+			//assert(ret == base::ERESULT_CODE_SUCCESS);
 			if(!base::is_successful_only(ret))
 			{
 				TRACE("[CSection (%s)] ERROR preload_if_notloaded",m_sec.c_str());
@@ -161,7 +162,7 @@ namespace macho
 		if(!m_isloaded)
 		{
 			base::ERESULT_CODE ret = preload();
-			assert(ret == base::ERESULT_CODE_SUCCESS);
+			//assert(ret == base::ERESULT_CODE_SUCCESS);
 			if(!base::is_successful_only(ret))
 			{
 				TRACE("[CSection (%s)] ERROR getAddress",m_sec.c_str());
@@ -174,7 +175,7 @@ namespace macho
 		if(!m_isloaded)
 		{
 			base::ERESULT_CODE ret = preload();
-			assert(ret == base::ERESULT_CODE_SUCCESS);
+			//assert(ret == base::ERESULT_CODE_SUCCESS);
 			if(!base::is_successful_only(ret))
 			{
 				TRACE("[CSection (%s)] ERROR getSize",m_sec.c_str());
@@ -187,7 +188,7 @@ namespace macho
 		if(!m_isloaded)
 		{
 			base::ERESULT_CODE ret = preload();
-			assert(ret == base::ERESULT_CODE_SUCCESS);
+			//assert(ret == base::ERESULT_CODE_SUCCESS);
 			if(!base::is_successful_only(ret))
 			{
 				TRACE("[CSection (%s)] ERROR getName",m_sec.c_str());

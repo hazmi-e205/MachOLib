@@ -3,7 +3,7 @@
 
 #include <map>
 #include <types.h>
-#include <shared_ptr_alias.hpp>
+#include <memory>
 #include <base/base.h>
 #include <io/source_of_stream.h>
 #include <io/stream_base.h>
@@ -13,7 +13,7 @@ namespace macho
 	class CSection
 	{
 	public:
-		typedef tools::shared_ptr<CSection> Ptr;
+		typedef std::shared_ptr<CSection> Ptr;
 	public:
 		static const char kSECTION_DEBUG_LINE[];
 		static const char kSECTION_DEBUG_INFO[];

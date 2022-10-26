@@ -212,12 +212,12 @@ public:
 
 	reference operator[](unsigned idx) 
 	{
-		assert(begin() + idx < end());
+		//assert(begin() + idx < end());
 		return begin()[idx];
 	}
 	const_reference operator[](unsigned idx) const 
 	{
-		assert(begin() + idx < end());
+		//assert(begin() + idx < end());
 		return begin()[idx];
 	}
 
@@ -713,7 +713,7 @@ Retry:
 	*/
 	void set_size(unsigned N) 
 	{
-		assert(N <= this->capacity());
+		//assert(N <= this->capacity());
 		this->setEnd(this->begin() + N);
 	}
 

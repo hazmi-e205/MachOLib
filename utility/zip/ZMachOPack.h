@@ -2,17 +2,17 @@
 #define __MACHO_ZIPED_PACKAGE_H__
 
 #include <vector>
-#include <shared_ptr_alias.hpp>
+#include <memory>
 extern "C"
 {
-	#include <zlib/zlib.h>
+    #include <zlib.h>
 	#include <unzip.h>
 }
 
 class ZMachOPack
 {
 public:
-	typedef tools::shared_ptr<ZMachOPack> Ptr;
+	typedef std::shared_ptr<ZMachOPack> Ptr;
 public:
 	ZMachOPack(const char* path);
 	~ZMachOPack();

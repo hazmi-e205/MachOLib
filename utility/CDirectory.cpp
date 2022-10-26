@@ -287,7 +287,7 @@ namespace io
 	{
 		return MakePathOf(levels.begin(),levels.end());
 	}
-	std::wstring CDirectory::MakePathOf(std::vector<std::wstring>::const_iterator &bg,std::vector<std::wstring>::const_iterator &end)
+    std::wstring CDirectory::MakePathOf(const std::vector<std::wstring>::const_iterator &bg, const std::vector<std::wstring>::const_iterator &end)
 	{
 		std::wstring path;
 		if(bg != end)

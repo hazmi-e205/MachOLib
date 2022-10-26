@@ -1,4 +1,5 @@
 #include "ZMachOPack.h"
+#include <string>
 
 ZMachOPack::ZMachOPack(const char* path)
 	:m_zip(NULL)

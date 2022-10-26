@@ -3,7 +3,7 @@
 
 #include <map>
 #include <types.h>
-#include <shared_ptr_alias.hpp>
+#include <memory>
 #include <base/base.h>
 #include <io/source_of_stream.h>
 #include <io/stream_base.h>
@@ -14,7 +14,7 @@ namespace macho
 	class CSegment
 	{
 	public:
-		typedef tools::shared_ptr<CSegment> Ptr;
+		typedef std::shared_ptr<CSegment> Ptr;
 		typedef std::map<std::string,CSection::Ptr> SectionsTable;
 	public:
 		static const char kSEGMENT_TEXT[];

@@ -1,4 +1,5 @@
 #include "stream_memory.h"
+#include <cstdlib>
 
 namespace io 
 {

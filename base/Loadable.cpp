@@ -42,7 +42,7 @@ namespace base
 		ERESULT_CODE ret_code = ERESULT_CODE_SUCCESS_ALREADY_LOADED;
 		if(m_loading_state == ELOADING_STATE_INCOMPLETE) {
 			ret_code = _load(flags);
-			assert(is_successful_only(ret_code));
+			//assert(is_successful_only(ret_code));
 			m_loading_state = is_successful_only(ret_code)?ELOADING_STATE_COMPLETE:ELOADING_STATE_INCOMPLETE;
 		}
 		return ret_code;

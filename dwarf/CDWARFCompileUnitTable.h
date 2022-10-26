@@ -9,7 +9,7 @@ namespace dwarf
 	class CDWARFCompileUnitTable
 	{
 	public:
-		typedef boost::shared_ptr<CDWARFCompileUnitTable> Ptr;
+		typedef std::shared_ptr<CDWARFCompileUnitTable> Ptr;
 		
 		struct CompileUnitNode
 		{

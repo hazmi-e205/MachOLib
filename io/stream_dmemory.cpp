@@ -1,4 +1,5 @@
 #include "stream_dmemory.h"
+#include <cstdlib>
 
 namespace io
 {

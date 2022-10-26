@@ -1,5 +1,5 @@
 #include "ztools.h"
-#include <zlib/zlib.h>
+#include <zlib.h>
 
 static unsigned char kMAGIC = 0x54;
 

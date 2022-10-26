@@ -5,15 +5,16 @@
 #ifndef __BIN_SON_BASE_STREAM_H__
 #define __BIN_SON_BASE_STREAM_H__
 
-#include <boost/shared_ptr.hpp>
-#include "io_betype.h"
+#include <memory>
+#include "io/io_type.h"
+#include "io/io_betype.h"
 
 namespace io
 {
 	struct stream_base
 	{
 	public:
-		typedef boost::shared_ptr<stream_base> ptr;
+		typedef std::shared_ptr<stream_base> ptr;
 	private:
 		EENCODING m_be;
 	public:

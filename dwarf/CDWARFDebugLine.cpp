@@ -2,6 +2,7 @@
 
 //#include <sstream>// for dump
 #include "IDWARFNameResolverByAddress.h"// for dump
+#include <algorithm>
 
 namespace dwarf
 {
@@ -103,12 +104,12 @@ namespace dwarf
 			stream->t_read(version);
 			if(version < 2 || version > 4)
 			{ 
-				assert(false && "unsupported prologue version!!!");
+				//assert(false && "unsupported prologue version!!!");
 				return oprologue; 
 			}
 			stream->t_read(prologue_length);
 			macho::t_uint32 end_prologue = static_cast<macho::t_uint32>(stream->position()) + prologue_length;
-			assert((end_prologue < static_cast<macho::t_uint32>(stream->size())) && "invalid length of prologue!!!");
+			//assert((end_prologue < static_cast<macho::t_uint32>(stream->size())) && "invalid length of prologue!!!");
 			stream->t_read(min_inst_length);
 			if (version >= 4)
 			{
@@ -273,7 +274,7 @@ namespace dwarf
 								row.Address = addr64;
 								break;
 							default:
-								assert(false && "bad size of address");
+								//assert(false && "bad size of address");
 								break;
 							}
 							break;
@@ -382,7 +383,7 @@ namespace dwarf
 
 					  default:
 						  {
-							  assert(opcode - 1U < m_prologue.getStandardOpcodeLengths().size());
+							  //assert(opcode - 1U < m_prologue.getStandardOpcodeLengths().size());
 							  io::t_uint8 opcode_length = m_prologue.getStandardOpcodeLengths()[opcode - 1];
 							  for (io::t_uint8 i = 0; i< opcode_length; ++i) {
 								  io::t_uint64 idle;
@@ -411,7 +412,7 @@ namespace dwarf
 		}
 		else
 		{
-			assert(false);
+			//assert(false);
 		}
 		std::sort(m_rows.begin(), m_rows.end());
 		return ret;

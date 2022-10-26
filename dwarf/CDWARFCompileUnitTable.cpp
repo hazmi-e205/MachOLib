@@ -1,5 +1,6 @@
 #include "CDWARFCompileUnitTable.h"
 #include <utility/CConsole.h>
+#include <algorithm>
 
 namespace dwarf
 {

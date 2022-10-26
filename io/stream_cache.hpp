@@ -3,6 +3,7 @@
 
 #include "stream_base.h"
 #include <utility/CConsole.h>
+#include <string.h>
 
 namespace io
 {

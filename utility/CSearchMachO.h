@@ -34,7 +34,7 @@ public:
 		virtual bool isBreak(){ return false; }
 	};
 public:
-	static bool Search(const wchar_t* dir,ISender& observer);
+    static bool Search(const wchar_t* dir, ISender& observer);
 	static bool ReadCrashLog(const std::wstring& extension,const std::wstring& path,CMachOCrashLog& out_);
 	static bool ReadCrashLogJson(const std::wstring& extension,const std::wstring& path,CMachOCrashLog& out_);
 	static bool FindMachOInDSYM(const std::wstring& path,CMachODSym& out_);

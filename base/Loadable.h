@@ -2,12 +2,11 @@
 #define __LOADABLE_H__
 
 #include <types.h>
-#include <shared_ptr_alias.hpp>
+#include <memory>
+#include "macho_errors.h"
 
 namespace base
 {
-	enum ERESULT_CODE;
-
 	class Loadable
 	{
 	public:

@@ -17,7 +17,7 @@ namespace dwarf
 		eValueType t = ConvertFormToType(form,-1,NULL);
 		if(install(t) == eValueTypeInvalid)
 		{
-			assert(false);
+			//assert(false);
 		}
 		return;
 	}
@@ -30,7 +30,7 @@ namespace dwarf
 			eValueType t = type();
 			if(install(t) == eValueTypeInvalid)
 			{
-				assert(false);
+				//assert(false);
 			}
 			else
 			{
@@ -52,7 +52,7 @@ namespace dwarf
 			else
 			{
 				m_type = DW_FORM_Invalid;
-				assert(false);
+				//assert(false);
 			}
 		}
 		return *this;
@@ -175,7 +175,7 @@ namespace dwarf
 			size = UnknownSize;
 			break;
 		default:
-			assert(false);
+			//assert(false);
 			break;
 		}
 		return type;
@@ -201,7 +201,7 @@ namespace dwarf
 			break;
 		default:
 			type = eValueTypeInvalid;
-			assert(false);
+			//assert(false);
 			break;
 		}
 		return type;
@@ -259,17 +259,17 @@ namespace dwarf
 	}
 	t_uint64& CDWARFFormValue::uval()
 	{
-		assert(type() == eValueTypeUnsigned || type() == eValueTypeBlock);
+		//assert(type() == eValueTypeUnsigned || type() == eValueTypeBlock);
 		return m_storage.un.uval;
 	}
 	t_int64& CDWARFFormValue::sval()
 	{
-		assert(type() == eValueTypeSigned);
+		//assert(type() == eValueTypeSigned);
 		return m_storage.un.sval;
 	}
 	CDWARFFormValue::FormStringData* CDWARFFormValue::pcstr()
 	{
-		assert(type() == eValueTypeCStr);
+		//assert(type() == eValueTypeCStr);
 		FormStringData* str = reinterpret_cast<FormStringData*>(&m_storage.un.bf[0]);
 		return str;
 	}
@@ -286,17 +286,17 @@ namespace dwarf
 
 	const t_uint64& CDWARFFormValue::uval() const
 	{
-		assert(type() == eValueTypeUnsigned || type() == eValueTypeBlock);
+		//assert(type() == eValueTypeUnsigned || type() == eValueTypeBlock);
 		return m_storage.un.uval;
 	}
 	const t_int64& CDWARFFormValue::sval() const
 	{
-		assert(type() == eValueTypeSigned);
+		//assert(type() == eValueTypeSigned);
 		return m_storage.un.sval;
 	}
 	const CDWARFFormValue::FormStringData* CDWARFFormValue::pcstr() const
 	{
-		assert(type() == eValueTypeCStr);
+		//assert(type() == eValueTypeCStr);
 		const FormStringData* str = reinterpret_cast<const FormStringData*>(&m_storage.un.bf[0]);
 		return str;
 	}
@@ -348,7 +348,7 @@ namespace dwarf
 			case DW_FORM_flag_present: return eFormClassFlag;
 			case DW_FORM_ref_sig8: return eFormClassReference;
 		}
-		assert(false);
+		//assert(false);
 		return  eFormClassInvalid;
 	}
 
@@ -429,7 +429,7 @@ namespace dwarf
 					else
 					{
 						ret = false;
-						assert(false);
+						//assert(false);
 					}
 					break;
 				}
@@ -571,7 +571,7 @@ namespace dwarf
 					break;
 				}
 			default:
-				assert(false);
+				//assert(false);
 				ret = false;
 				break;
 			}
@@ -585,14 +585,14 @@ namespace dwarf
 				/*m_storage.data.resize(static_cast<size_t>(m_storage.un.uval));
 				/*not needed now*/
 				std::vector<char> temp(static_cast<size_t>(m_storage.un.uval),0);
-				assert(temp.size() == m_storage.un.uval);
+				//assert(temp.size() == m_storage.un.uval);
 				if(!temp.empty()) {
 					stream->read(&temp[0],temp.size());
 				}
 			}
 			else
 			{
-				assert(false);
+				//assert(false);
 				ret = false;
 			}
 		}
@@ -653,7 +653,7 @@ namespace dwarf
 					if(s < 0ULL)
 					{
 						ret = false;
-						assert(false);
+						//assert(false);
 					}
 					break;
 				}
@@ -763,7 +763,7 @@ namespace dwarf
 					break;
 				}
 			default:
-				assert(false);
+				//assert(false);
 				ret = false;
 				break;
 			}
@@ -777,7 +777,7 @@ namespace dwarf
 			}
 			else
 			{
-				assert(false);
+				//assert(false);
 				ret = false;
 			}
 		}

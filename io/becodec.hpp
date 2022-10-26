@@ -9,6 +9,9 @@
 #ifndef __BIN_SON_BIG_ENDIAN_BYTE_ORDER_H__
 #define __BIN_SON_BIG_ENDIAN_BYTE_ORDER_H__
 
+#include "../types.h"
+using namespace macho;
+
 namespace io
 {
 	#pragma pack(push,1)

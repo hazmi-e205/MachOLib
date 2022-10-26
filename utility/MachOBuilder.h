@@ -3,7 +3,7 @@
 
 #include <map>
 #include <types.h>
-#include <shared_ptr_alias.hpp>
+#include <memory>
 #include <base/base.h>
 #include <macho/CFAT.h>
 #include <macho/CSegment.h>

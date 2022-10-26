@@ -42,7 +42,7 @@ namespace dwarf
 			//64bit format
 			stream->t_read(m_length);
 			m_dwarf_format = 64;
-			assert(false && "We don't support the 64bit format properly everywhere");
+			//assert(false && "We don't support the 64bit format properly everywhere");
 			return false;
 		}
 		else

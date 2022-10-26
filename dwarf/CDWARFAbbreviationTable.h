@@ -7,7 +7,7 @@
 #include <limits>
 #include <io/stream_base.h>
 #include <io/source_of_stream.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <io/stream_memory.h>
 #include "DWARFTypes.h"
 #include "EDWARF.h"
@@ -17,7 +17,7 @@ namespace dwarf
 	class CDWARFAbbreviationTable
 	{
 	public:
-		typedef boost::shared_ptr<CDWARFAbbreviationTable> Ptr;
+		typedef std::shared_ptr<CDWARFAbbreviationTable> Ptr;
 
 		class CDWARFAttribute 
 		{

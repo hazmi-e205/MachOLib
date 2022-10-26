@@ -14,7 +14,7 @@ const wchar_t CSearchMachO::kKEY_WORD1_OF_CRASH_LOG[] = L"Incident Identifier:";
 const wchar_t CSearchMachO::kRELATIVE_PATH_OF_MACHO_DSYM[] = L"\\Contents\\Resources\\DWARF\\";
 const wchar_t CSearchMachO::kEXTENSION_OF_DYLIB[] = L".dylib";
 
-bool CSearchMachO::Search(const wchar_t* cpath,ISender& observer)
+bool CSearchMachO::Search(const wchar_t* cpath, ISender& observer)
 {
 	auto TryReadCrashLog = [](const std::wstring& path, CMachOCrashLog& out_)
 	{

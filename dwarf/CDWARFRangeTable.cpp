@@ -1,5 +1,5 @@
 #include "CDWARFRangeTable.h"
-
+#include <algorithm>
 
 namespace dwarf
 {
@@ -12,7 +12,7 @@ namespace dwarf
 			const RangeSet* set = extract(addressSize, stream);
 			if(set == NULL)
 			{
-				assert(false && "Error on extart range set");
+				//assert(false && "Error on extart range set");
 				break;
 			}
 		}
@@ -53,8 +53,8 @@ namespace dwarf
 				while(stream->position() < stream->size())
 				{
 					t_uint32 begin = 0, end = 0; 
-					if(stream->t_read(begin) != sizeof(begin)){ ret = false; break; }
-					if(stream->t_read(end) != sizeof(end)){ ret = false; break; }
+                    if(stream->t_read(begin) != sizeof(begin)){ ret = (RangeSet*)false; break; }
+                    if(stream->t_read(end) != sizeof(end)){ ret = (RangeSet*)false; break; }
 					curset.Collection.push_back(CDWARFRangeListEntry(begin, end));
 					if(curset.Collection.back().isEndOfListEntry())
 					{
@@ -72,8 +72,8 @@ namespace dwarf
 				while(stream->position() < stream->size())
 				{
 					t_uint64 begin = 0, end = 0; 
-					if(stream->t_read(begin) != sizeof(begin)){ ret = false; break; }
-					if(stream->t_read(end) != sizeof(end)){ ret = false; break; }
+                    if(stream->t_read(begin) != sizeof(begin)){ ret = (RangeSet*)false; break; }
+                    if(stream->t_read(end) != sizeof(end)){ ret = (RangeSet*)false; break; }
 					curset.Collection.push_back(CDWARFRangeListEntry(begin, end));
 					if(curset.Collection.back().isEndOfListEntry())
 					{
@@ -86,7 +86,7 @@ namespace dwarf
 				break;
 			}
 		default:
-			assert(false && "wrong address size!!!!");
+			//assert(false && "wrong address size!!!!");
 			break;
 		}
 		return ret;

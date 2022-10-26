@@ -1,4 +1,5 @@
 #include "CMachODSym.h"
+#include <algorithm>
 
 
 const wchar_t CMachODSym::kRELATIVE_PATH_OF_MACHO_DSYM[] = L"\\Contents\\Resources\\DWARF\\";

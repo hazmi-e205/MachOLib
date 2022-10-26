@@ -90,7 +90,7 @@ namespace dwarf
 			return &(*i).second;
 		}
 		TRACE("[CDWARFAbbreviationTable] error get code = %u, map size = %u", code, m_map.size());
-		assert(false);
+		//assert(false);
 		return NULL;
 	}
 }

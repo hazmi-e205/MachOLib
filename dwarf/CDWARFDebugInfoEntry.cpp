@@ -97,7 +97,7 @@ namespace dwarf
 						const CDWARFAbbreviationTable::CDWARFAttribute& attr = decl->getAttributeAt(i);
 						m_values.push_back(std::make_pair(attr.getAttribute(), CDWARFFormValue(attr.getForm())));
 						ret_code = m_values.back().second.parse(unit.getAddrSize(),unit.getDwarfFromat(), unit.getVersion(),debug_str,stream);
-						assert(ret_code);
+						//assert(ret_code);
 					}
 				}
 				else
@@ -106,7 +106,7 @@ namespace dwarf
 					{
 						const CDWARFAbbreviationTable::CDWARFAttribute& attr = decl->getAttributeAt(i);
 						ret_code = CDWARFFormValue::Skip(attr.getForm(),unit.getAddrSize(),unit.getDwarfFromat(), unit.getVersion(),stream);
-						assert(ret_code);
+						//assert(ret_code);
 					}
 				}
 			}
@@ -204,7 +204,7 @@ namespace dwarf
 				}
 			default:
 				{
-					assert(false && "Unsupported form class");
+					//assert(false && "Unsupported form class");
 					return default_;
 				}
 			}

@@ -1,4 +1,5 @@
 #include "CDWARFArangeTable.h"
+#include <algorithm>
 
 namespace dwarf
 {
@@ -83,14 +84,14 @@ namespace dwarf
 					break;
 				}
 			default:
-				assert(false && "bad address size of arange set");
+				//assert(false && "bad address size of arange set");
 				ret = false;
 				break;
 			}
 		}
 		else
 		{
-			assert(false && "invalid arange set");
+			//assert(false && "invalid arange set");
 		}
 		return ret && (m_ranges.size() - counter) > 0;
 	}

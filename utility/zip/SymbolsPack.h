@@ -6,7 +6,8 @@
 #include <vector>
 #include <io/stream_base.h>
 #include <io/source_of_stream.h>
-#include <shared_ptr_alias.hpp>
+#include <memory>
+#include <string.h>
 
 /*
 //big-endian encoding
@@ -235,7 +236,7 @@ struct SymbolNode64
 class SymbolPackage
 {
 public:
-	typedef tools::shared_ptr<SymbolPackage> Ptr;
+	typedef std::shared_ptr<SymbolPackage> Ptr;
 	typedef std::map<std::string, MachODescription> RecordTable;
 	typedef std::vector<char> StringsArr;
 public:

@@ -3,7 +3,7 @@
 
 #include <map>
 #include <types.h>
-#include <shared_ptr_alias.hpp>
+#include <memory>
 #include <base/base.h>
 #include <io/source_of_stream.h>
 #include <io/stream_base.h>
@@ -55,8 +55,8 @@ namespace macho
 		enum { kMACHO_MAGIC_64 = 0xFEEDFACF };
 		enum { kMACHO_MAGIC_SWAP_64 = 0xCFFAEDFE };
 
-		typedef tools::shared_ptr<CMachO> ptr;
-		typedef tools::shared_ptr<CMachO> Ptr;
+		typedef std::shared_ptr<CMachO> ptr;
+		typedef std::shared_ptr<CMachO> Ptr;
 		typedef std::vector<CDyLib> DyLibTable;
 		typedef std::vector< std::pair<t_uint32,t_uint32> > LoadCommandsTable; /*first - type, second - size of command*/
 

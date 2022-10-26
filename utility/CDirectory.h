@@ -28,7 +28,7 @@ namespace io
 		static std::wstring NormalizePath(const std::wstring &path);
 		static std::vector<std::wstring> GetLevelsOf(const std::wstring &path);
 		static std::wstring MakePathOf(const std::vector<std::wstring> &levels);
-		static std::wstring MakePathOf(std::vector<std::wstring>::const_iterator &bg,std::vector<std::wstring>::const_iterator &end);
+        static std::wstring MakePathOf(const std::vector<std::wstring>::const_iterator &bg, const std::vector<std::wstring>::const_iterator &end);
 		static int tonormal_path_separator(int c);
 		static std::string NormalizeEndOfDir(const std::string& dir);
 		static std::wstring NormalizeEndOfDir(const std::wstring& dir);

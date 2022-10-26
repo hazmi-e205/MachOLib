@@ -138,7 +138,7 @@ namespace macho
 	{
 		if(!m_isloaded) {
 			base::ERESULT_CODE ret_code = preload();
-			assert(ret_code == base::ERESULT_CODE_SUCCESS);
+			//assert(ret_code == base::ERESULT_CODE_SUCCESS);
 			if(!base::is_successful_only(ret_code))
 			{
 				TRACE("[CSegment (%s)] getVmAddress",m_name.c_str());
@@ -150,7 +150,7 @@ namespace macho
 	{
 		if(!m_isloaded) {
 			base::ERESULT_CODE ret_code = preload();
-			assert(ret_code == base::ERESULT_CODE_SUCCESS);
+			//assert(ret_code == base::ERESULT_CODE_SUCCESS);
 			if(!base::is_successful_only(ret_code))
 			{
 				TRACE("[CSegment (%s)] ERROR getVmSize",m_name.c_str());
@@ -162,7 +162,7 @@ namespace macho
 	{
 		if(!m_isloaded) {
 			base::ERESULT_CODE ret_code = preload();
-			assert(ret_code == base::ERESULT_CODE_SUCCESS);
+			//assert(ret_code == base::ERESULT_CODE_SUCCESS);
 			if(!base::is_successful_only(ret_code))
 			{
 				TRACE("[CSegment (%s)] ERROR isExistSection name = %s",m_name.c_str(),name);
@@ -174,7 +174,7 @@ namespace macho
 	{
 		if(!m_isloaded) {
 			base::ERESULT_CODE ret_code = preload();
-			assert(ret_code == base::ERESULT_CODE_SUCCESS);
+			//assert(ret_code == base::ERESULT_CODE_SUCCESS);
 			if(!base::is_successful_only(ret_code))
 			{
 				TRACE("[CSegment (%s)] ERROR getSection name = %s",m_name.c_str(),name);
@@ -186,7 +186,7 @@ namespace macho
 	{
 		if(!m_isloaded) {
 			base::ERESULT_CODE ret_code = preload();
-			assert(ret_code == base::ERESULT_CODE_SUCCESS);
+			//assert(ret_code == base::ERESULT_CODE_SUCCESS);
 		}
 		t_int32 chk = 0;
 		for(SectionsTable::const_iterator i = m_sections.begin(), e = m_sections.end();
@@ -199,7 +199,7 @@ namespace macho
 			}
 			++chk;
 		}
-		assert(false);
+		//assert(false);
 		return CSection::Ptr();
 	}
 	t_uint32 CSegment::getSectionCount()
@@ -210,7 +210,7 @@ namespace macho
 	{
 		if(!m_isloaded) {
 			base::ERESULT_CODE ret_code = preload();
-			assert(ret_code == base::ERESULT_CODE_SUCCESS);
+			//assert(ret_code == base::ERESULT_CODE_SUCCESS);
 		}
 		return m_name;
 	}

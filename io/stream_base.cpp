@@ -1,4 +1,5 @@
 #include "stream_base.h"
+#include <string.h>
 
 #define RC_C(x) reinterpret_cast<const char*>(x)
 #define RC(x) reinterpret_cast<char*>(x)

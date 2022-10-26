@@ -1,6 +1,7 @@
 #include "CFAT.h"
 #include <assert.h>
 #include <utility/CConsole.h>
+#include <algorithm>
 
 namespace macho
 {
@@ -79,7 +80,7 @@ namespace macho
 				return (*i);
 			}
 		}
-		assert(false);
+		//assert(false);
 		return CMachO::Ptr();
 	}
 	CMachO::Ptr	CFAT::getMachO(const std::string& uuid)
@@ -88,12 +89,12 @@ namespace macho
 		load_if_notloaded();
 		std::string temp(uuid);
 		std::transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
-		CMachOCollection::const_iterator i = std::find_if(m_machos.begin(), m_machos.end(), FindMachOWithUUID(uuid));
+        CMachOCollection::const_iterator i = std::find_if(m_machos.begin(), m_machos.end(), [&](const auto& val){ return val->getUUID() == temp; });
 		
-		if(i != m_machos.end())
-		{
-			ret = (*i);
-		}
+        if(i != m_machos.end())
+        {
+            ret = (*i);
+        }
 		return ret;
 	}
 	CMachO::Ptr	CFAT::getMachO(const std::wstring& uuid)
@@ -113,13 +114,16 @@ namespace macho
 	CMachO& CFAT::getMachODeprecated(ECPU_TYPE type,ECPU_SUB_TYPE sub_type)
 	{
 		CMachO::Ptr temp = getMachO(type,sub_type);
-		assert(temp.get() != NULL);
+		//assert(temp.get() != NULL);
 		return temp.get()?(*temp.get()):(*(new CMachO()));//!!!! leak need before used isExistMachO
 	}
 	bool CFAT::isExistMachO(const std::string& uuid)
 	{
-		load_if_notloaded();
-		return (std::find_if(m_machos.begin(), m_machos.end(), FindMachOWithUUID(uuid)) != m_machos.end());
+        load_if_notloaded();
+        std::string temp(uuid);
+        std::transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
+        CMachOCollection::const_iterator i = std::find_if(m_machos.begin(), m_machos.end(), [&](const auto& val){ return val->getUUID() == temp; });
+        return i != m_machos.end();
 	}
 	bool CFAT::isExistMachO(const std::wstring& uuid)
 	{
@@ -128,13 +132,13 @@ namespace macho
 	CMachO& CFAT::getMachODeprecated(const std::string& uuid)
 	{
 		CMachO::Ptr temp = getMachO(uuid);
-		assert(temp.get() != NULL);
+		//assert(temp.get() != NULL);
 		return temp.get()?(*temp.get()):(*(new CMachO()));//!!!! leak need before used isExistMachO
 	}
 	CMachO& CFAT::getMachOAtDeprecated(unsigned int idx)
 	{
 		CMachO::Ptr temp = getMachOAt(idx);
-		assert(temp.get() != NULL);
+		//assert(temp.get() != NULL);
 		return temp.get()?(*temp.get()):(*(new CMachO()));//!!!! leak need before used isExistMachO
 	}
 	CMachO& CFAT::getMachODeprecated(const std::wstring& uuid)

@@ -4,6 +4,7 @@
 #include <macho/UUID.h>
 #include "ztools.h"
 #include <vector>
+#include <algorithm>
 
 SymbolPackage::SymbolPackage(const io::source_of_stream& pack)
 	:m_source(pack),

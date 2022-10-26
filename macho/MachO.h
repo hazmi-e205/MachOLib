@@ -2,6 +2,7 @@
 #define __MACHO_STRUCTS_H__
 
 #include <base/base.h>
+#include <cstring>
 
 namespace macho
 {

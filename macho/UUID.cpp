@@ -1,5 +1,7 @@
 #include "UUID.h"
 #include <assert.h>
+#include <cstring>
+
 namespace macho
 {
 	static const char kNUM_TABLE[] = "0123456789ABCDEF";
@@ -35,7 +37,7 @@ namespace macho
 	}
 	int UUIDStr2Mem(const std::string& str, char outres[])
 	{
-		assert(str.size() >= kUUID_CHARACTER_COUNT);
+		//assert(str.size() >= kUUID_CHARACTER_COUNT);
 		memset(outres, 0, kUUID_BYTE_SIZE);
 		for(t_uint32 i = 0; i < kUUID_BYTE_SIZE; ++i)
 		{

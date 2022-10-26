@@ -289,7 +289,7 @@ namespace dwarf
 		}
 		else
 		{
-			assert(false && "Line table is not found");
+			//assert(false && "Line table is not found");
 		}
 		return t;
 	}

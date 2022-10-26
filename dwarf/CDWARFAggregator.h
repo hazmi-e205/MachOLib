@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 #include <limits>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include "EDWARF.h"
 #include "DWARFTypes.h"
 #include "CDWARFDebugLine.h"
@@ -27,9 +27,9 @@ namespace dwarf
 	class CDWARFAggregator
 	{
 	public:
-		typedef boost::shared_ptr<CDWARFAggregator> Ptr;
-		typedef boost::shared_ptr<macho::CSection>	SectionPtr;
-		typedef boost::shared_ptr<macho::CMachO>	MachOPtr;
+		typedef std::shared_ptr<CDWARFAggregator> Ptr;
+		typedef std::shared_ptr<macho::CSection>	SectionPtr;
+		typedef std::shared_ptr<macho::CMachO>	MachOPtr;
 		static const t_uint32 kINVALID_LINE = 0xFFFFFFFF;
 		enum { kCACHE_SIZE = 4096 };
 	public:

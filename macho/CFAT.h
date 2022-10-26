@@ -2,7 +2,7 @@
 #define __CFAT_H__
 
 #include <map>
-#include <shared_ptr_alias.hpp>
+#include <memory>
 #include <base/base.h>
 #include <types.h>
 #include "CMachO.h"
@@ -18,7 +18,7 @@ namespace macho
 	public:
 		enum { kFAT_MAGIC = 0xCAFEBABEUL };
 		enum { kFAT_MAGIC_SWAP = 0xBEBAFECA };
-		typedef tools::shared_ptr<CFAT> ptr;
+		typedef std::shared_ptr<CFAT> ptr;
 		typedef ptr Ptr;
 		typedef std::vector<CMachO::Ptr> CMachOCollection;
 

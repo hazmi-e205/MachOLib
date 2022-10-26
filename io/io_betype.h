@@ -5,8 +5,6 @@
 #ifndef __BIN_SON_TYPE_BE_H__
 #define __BIN_SON_TYPE_BE_H__
 
-#include "io_type.h"
-
 namespace io
 {
 	enum EENCODING

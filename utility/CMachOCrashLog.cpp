@@ -1,6 +1,6 @@
 #include "CMachOCrashLog.h"
 #include <macho/CFAT.h>
-
+#include <algorithm>
 #include <rapidjson/document.h>
 
 const wchar_t CMachOCrashLog::kTOKEN_BINARY_IMAGES[] = L"Binary Images:";
@@ -16,13 +16,13 @@ const wchar_t CMachOCrashLog::kCRASH_BROKEN_PIPE[] = L"SIGPIPE";
 const wchar_t CMachOCrashLog::kCRASH_ILLEGAL_INSTRUCTION[] = L"SIGILL";
 const wchar_t CMachOCrashLog::kCRASH_BREAK_POINT[] = L"SIGTRAP";
 
-std::wstring& MakeUppercase(std::wstring& inout)
+std::wstring& MakeUppercase(std::wstring inout)
 {
 	std::transform(inout.begin(),inout.end(), inout.begin(),::toupper);
 	return inout;
 }
 
-std::wstring& DropDashes(std::wstring& inout)
+std::wstring& DropDashes(std::wstring inout)
 {
 	inout.erase(std::remove_if(inout.begin(), inout.end(), [](const wchar_t& c){return c == L'-';}), inout.end());
 	return inout;
