@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>MachOLib</ProjectName>
+    <ProjectGuid>{9C976A11-C96D-4D2D-9F9B-ED0095063F05}</ProjectGuid>
+    <RootNamespace>MachOLib</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>./;../boost/;./libiberty/;../unzip/;../zlib/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>zlib.lib;unzip.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>./;../boost/;./libiberty/;../unzip/;../zlib/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>zlib.lib;unzip.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="io\stream_dmemory.h" />
+    <ClInclude Include="macho\CDyLib.h" />
+    <ClInclude Include="macho\CFAT.h" />
+    <ClInclude Include="macho\CFATArch.h" />
+    <ClInclude Include="macho\CMachO.h" />
+    <ClInclude Include="macho\CSection.h" />
+    <ClInclude Include="macho\CSegment.h" />
+    <ClInclude Include="macho\CSymbol.h" />
+    <ClInclude Include="macho\CSymbolTable.h" />
+    <ClInclude Include="macho\ECPUSubTypes.h" />
+    <ClInclude Include="ECPUTypes.h" />
+    <ClInclude Include="macho\EFileTypes.h" />
+    <ClInclude Include="macho\ELoadCommands.h" />
+    <ClInclude Include="macho\EMagic.h" />
+    <ClInclude Include="macho\MachO.h" />
+    <ClInclude Include="macho\MachOWrite.hpp" />
+    <ClInclude Include="macho\UUID.h" />
+    <ClInclude Include="utility\CConsole.h" />
+    <ClInclude Include="utility\CDirectory.h" />
+    <ClInclude Include="utility\CMachOApplication.h" />
+    <ClInclude Include="utility\CMachOCrashLog.h" />
+    <ClInclude Include="utility\CMachODSym.h" />
+    <ClInclude Include="utility\CMachODyLib.h" />
+    <ClInclude Include="utility\CNameResolverByAddress.hpp" />
+    <ClInclude Include="utility\CSearchMachO.h" />
+    <ClInclude Include="utility\demangler.hpp" />
+    <ClInclude Include="utility\MachOBuilder.h" />
+    <ClInclude Include="utility\SmallVector.h" />
+    <ClInclude Include="utility\string_tools.hpp" />
+    <ClInclude Include="utility\type_traits.h" />
+    <ClInclude Include="utility\zip\SymbolsPack.h" />
+    <ClInclude Include="utility\zip\ZMachOPack.h" />
+    <ClInclude Include="libiberty\ansidecl.h" />
+    <ClInclude Include="libiberty\config.h" />
+    <ClInclude Include="libiberty\cp-demangle.h" />
+    <ClInclude Include="libiberty\demangle.h" />
+    <ClInclude Include="libiberty\dwarf2.h" />
+    <ClInclude Include="libiberty\libiberty.h" />
+    <ClInclude Include="libiberty\safe-ctype.h" />
+    <ClInclude Include="dwarf\CDWARFAbbreviationTable.h" />
+    <ClInclude Include="dwarf\CDWARFAggregator.h" />
+    <ClInclude Include="dwarf\CDWARFArangeTable.h" />
+    <ClInclude Include="dwarf\CDWARFCompileUnit.h" />
+    <ClInclude Include="dwarf\CDWARFCompileUnitTable.h" />
+    <ClInclude Include="dwarf\CDWARFDebugInfoEntry.h" />
+    <ClInclude Include="dwarf\CDWARFDebugLine.h" />
+    <ClInclude Include="dwarf\CDWARFFormValue.h" />
+    <ClInclude Include="dwarf\CDWARFRangeTable.h" />
+    <ClInclude Include="dwarf\DWARFTypes.h" />
+    <ClInclude Include="dwarf\EDWARF.h" />
+    <ClInclude Include="dwarf\IDWARFNameResolverByAddress.h" />
+    <ClInclude Include="dwarf\utility\CDWARFRangeResolver.hpp" />
+    <ClInclude Include="base\base.h" />
+    <ClInclude Include="base\Loadable.h" />
+    <ClInclude Include="macho_errors.h" />
+    <ClInclude Include="io\becodec.hpp" />
+    <ClInclude Include="io\io_betype.h" />
+    <ClInclude Include="io\io_type.h" />
+    <ClInclude Include="io\lecodec.hpp" />
+    <ClInclude Include="io\source_of_stream.h" />
+    <ClInclude Include="io\stream_base.h" />
+    <ClInclude Include="io\stream_cache.hpp" />
+    <ClInclude Include="io\stream_file.h" />
+    <ClInclude Include="io\stream_memory.h" />
+    <ClInclude Include="io\substream.h" />
+    <ClInclude Include="shared_ptr_alias.hpp" />
+    <ClInclude Include="types.h" />
+    <ClInclude Include="utility\zip\ztools.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="io\stream_dmemory.cpp" />
+    <ClCompile Include="macho\CFAT.cpp" />
+    <ClCompile Include="macho\CFATArch.cpp" />
+    <ClCompile Include="macho\CMachO.cpp" />
+    <ClCompile Include="macho\CSection.cpp" />
+    <ClCompile Include="macho\CSegment.cpp" />
+    <ClCompile Include="macho\CSymbol.cpp" />
+    <ClCompile Include="macho\CSymbolTable.cpp" />
+    <ClCompile Include="macho\UUID.cpp" />
+    <ClCompile Include="utility\CConsole.cpp" />
+    <ClCompile Include="utility\CDirectory.cpp" />
+    <ClCompile Include="utility\CMachOApplication.cpp" />
+    <ClCompile Include="utility\CMachOCrashLog.cpp" />
+    <ClCompile Include="utility\CMachODSym.cpp" />
+    <ClCompile Include="utility\CMachODyLib.cpp" />
+    <ClCompile Include="utility\CSearchMachO.cpp" />
+    <ClCompile Include="utility\MachOBuilder.cpp" />
+    <ClCompile Include="utility\SmallVector.cpp" />
+    <ClCompile Include="utility\zip\SymbolsPack.cpp" />
+    <ClCompile Include="utility\zip\ZMachOPack.cpp" />
+    <ClCompile Include="libiberty\alloca.c" />
+    <ClCompile Include="libiberty\cp-demangle.c" />
+    <ClCompile Include="libiberty\cp-demint.c" />
+    <ClCompile Include="libiberty\cplus-dem.c" />
+    <ClCompile Include="libiberty\insque.c" />
+    <ClCompile Include="libiberty\safe-ctype.c" />
+    <ClCompile Include="libiberty\xexit.c" />
+    <ClCompile Include="libiberty\xmalloc.c" />
+    <ClCompile Include="libiberty\xmemdup.c" />
+    <ClCompile Include="libiberty\xstrdup.c" />
+    <ClCompile Include="libiberty\xstrndup.c" />
+    <ClCompile Include="dwarf\CDWARFAbbreviationTable.cpp" />
+    <ClCompile Include="dwarf\CDWARFAggregator.cpp" />
+    <ClCompile Include="dwarf\CDWARFArangeTable.cpp" />
+    <ClCompile Include="dwarf\CDWARFCompileUnit.cpp" />
+    <ClCompile Include="dwarf\CDWARFCompileUnitTable.cpp" />
+    <ClCompile Include="dwarf\CDWARFDebugInfoEntry.cpp" />
+    <ClCompile Include="dwarf\CDWARFDebugLine.cpp" />
+    <ClCompile Include="dwarf\CDWARFFormValue.cpp" />
+    <ClCompile Include="dwarf\CDWARFRangeTable.cpp" />
+    <ClCompile Include="base\Loadable.cpp" />
+    <ClCompile Include="io\source_of_stream.cpp" />
+    <ClCompile Include="io\stream_base.cpp" />
+    <ClCompile Include="io\stream_file.cpp" />
+    <ClCompile Include="io\stream_memory.cpp" />
+    <ClCompile Include="io\substream.cpp" />
+    <ClCompile Include="utility\zip\ztools.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libiberty\dwarf2.def" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="macho">
+      <UniqueIdentifier>{cfd0e4a4-2092-4033-913d-669301e6cc70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{1116dd35-c131-4978-ae9d-c1aad7a14b0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility\zip">
+      <UniqueIdentifier>{c9eeef39-d193-4fc2-be63-681d7d4d4e64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libiberty">
+      <UniqueIdentifier>{7f823793-0b45-4ee5-ae92-c822f6294639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dwarf">
+      <UniqueIdentifier>{77d14f83-d836-4ebf-aee1-5e9fefc1a7d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dwarf\utility">
+      <UniqueIdentifier>{aba23a92-019d-4e95-a5a2-40dd4b428c2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{f83b621c-56a8-47be-a728-d7e7003db449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="io">
+      <UniqueIdentifier>{33d278c5-8db0-47ec-9d63-ad79e5268be2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="macho\CDyLib.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\CFAT.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\CFATArch.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\CMachO.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\CSection.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\CSegment.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\CSymbol.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\CSymbolTable.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\ECPUSubTypes.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="ECPUTypes.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\EFileTypes.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\ELoadCommands.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\EMagic.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\MachO.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\MachOWrite.hpp">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="macho\UUID.h">
+      <Filter>macho</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\CConsole.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\CDirectory.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\CMachOApplication.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\CMachOCrashLog.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\CMachODSym.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\CMachODyLib.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\CNameResolverByAddress.hpp">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\CSearchMachO.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\demangler.hpp">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\MachOBuilder.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\SmallVector.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\string_tools.hpp">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\type_traits.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\zip\ZMachOPack.h">
+      <Filter>utility\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="libiberty\ansidecl.h">
+      <Filter>libiberty</Filter>
+    </ClInclude>
+    <ClInclude Include="libiberty\config.h">
+      <Filter>libiberty</Filter>
+    </ClInclude>
+    <ClInclude Include="libiberty\cp-demangle.h">
+      <Filter>libiberty</Filter>
+    </ClInclude>
+    <ClInclude Include="libiberty\demangle.h">
+      <Filter>libiberty</Filter>
+    </ClInclude>
+    <ClInclude Include="libiberty\dwarf2.h">
+      <Filter>libiberty</Filter>
+    </ClInclude>
+    <ClInclude Include="libiberty\libiberty.h">
+      <Filter>libiberty</Filter>
+    </ClInclude>
+    <ClInclude Include="libiberty\safe-ctype.h">
+      <Filter>libiberty</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\CDWARFAbbreviationTable.h">
+      <Filter>dwarf</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\CDWARFAggregator.h">
+      <Filter>dwarf</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\CDWARFArangeTable.h">
+      <Filter>dwarf</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\CDWARFCompileUnit.h">
+      <Filter>dwarf</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\CDWARFCompileUnitTable.h">
+      <Filter>dwarf</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\CDWARFDebugInfoEntry.h">
+      <Filter>dwarf</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\CDWARFDebugLine.h">
+      <Filter>dwarf</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\CDWARFFormValue.h">
+      <Filter>dwarf</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\CDWARFRangeTable.h">
+      <Filter>dwarf</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\DWARFTypes.h">
+      <Filter>dwarf</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\EDWARF.h">
+      <Filter>dwarf</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\IDWARFNameResolverByAddress.h">
+      <Filter>dwarf</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\utility\CDWARFRangeResolver.hpp">
+      <Filter>dwarf\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="base\base.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\Loadable.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="macho_errors.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="io\becodec.hpp">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\io_betype.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\io_type.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\lecodec.hpp">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\source_of_stream.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\stream_base.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\stream_cache.hpp">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\stream_file.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\stream_memory.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\substream.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="shared_ptr_alias.hpp" />
+    <ClInclude Include="types.h" />
+    <ClInclude Include="utility\zip\SymbolsPack.h">
+      <Filter>utility\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="io\stream_dmemory.h" />
+    <ClInclude Include="utility\zip\ztools.h">
+      <Filter>utility\zip</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="macho\CFAT.cpp">
+      <Filter>macho</Filter>
+    </ClCompile>
+    <ClCompile Include="macho\CFATArch.cpp">
+      <Filter>macho</Filter>
+    </ClCompile>
+    <ClCompile Include="macho\CMachO.cpp">
+      <Filter>macho</Filter>
+    </ClCompile>
+    <ClCompile Include="macho\CSection.cpp">
+      <Filter>macho</Filter>
+    </ClCompile>
+    <ClCompile Include="macho\CSegment.cpp">
+      <Filter>macho</Filter>
+    </ClCompile>
+    <ClCompile Include="macho\CSymbol.cpp">
+      <Filter>macho</Filter>
+    </ClCompile>
+    <ClCompile Include="macho\CSymbolTable.cpp">
+      <Filter>macho</Filter>
+    </ClCompile>
+    <ClCompile Include="macho\UUID.cpp">
+      <Filter>macho</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\CConsole.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\CDirectory.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\CMachOApplication.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\CMachOCrashLog.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\CMachODSym.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\CMachODyLib.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\CSearchMachO.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\MachOBuilder.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\SmallVector.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\zip\ZMachOPack.cpp">
+      <Filter>utility\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="libiberty\alloca.c">
+      <Filter>libiberty</Filter>
+    </ClCompile>
+    <ClCompile Include="libiberty\cp-demangle.c">
+      <Filter>libiberty</Filter>
+    </ClCompile>
+    <ClCompile Include="libiberty\cp-demint.c">
+      <Filter>libiberty</Filter>
+    </ClCompile>
+    <ClCompile Include="libiberty\cplus-dem.c">
+      <Filter>libiberty</Filter>
+    </ClCompile>
+    <ClCompile Include="libiberty\insque.c">
+      <Filter>libiberty</Filter>
+    </ClCompile>
+    <ClCompile Include="libiberty\safe-ctype.c">
+      <Filter>libiberty</Filter>
+    </ClCompile>
+    <ClCompile Include="libiberty\xexit.c">
+      <Filter>libiberty</Filter>
+    </ClCompile>
+    <ClCompile Include="libiberty\xmalloc.c">
+      <Filter>libiberty</Filter>
+    </ClCompile>
+    <ClCompile Include="libiberty\xmemdup.c">
+      <Filter>libiberty</Filter>
+    </ClCompile>
+    <ClCompile Include="libiberty\xstrdup.c">
+      <Filter>libiberty</Filter>
+    </ClCompile>
+    <ClCompile Include="libiberty\xstrndup.c">
+      <Filter>libiberty</Filter>
+    </ClCompile>
+    <ClCompile Include="dwarf\CDWARFAbbreviationTable.cpp">
+      <Filter>dwarf</Filter>
+    </ClCompile>
+    <ClCompile Include="dwarf\CDWARFAggregator.cpp">
+      <Filter>dwarf</Filter>
+    </ClCompile>
+    <ClCompile Include="dwarf\CDWARFArangeTable.cpp">
+      <Filter>dwarf</Filter>
+    </ClCompile>
+    <ClCompile Include="dwarf\CDWARFCompileUnit.cpp">
+      <Filter>dwarf</Filter>
+    </ClCompile>
+    <ClCompile Include="dwarf\CDWARFCompileUnitTable.cpp">
+      <Filter>dwarf</Filter>
+    </ClCompile>
+    <ClCompile Include="dwarf\CDWARFDebugInfoEntry.cpp">
+      <Filter>dwarf</Filter>
+    </ClCompile>
+    <ClCompile Include="dwarf\CDWARFDebugLine.cpp">
+      <Filter>dwarf</Filter>
+    </ClCompile>
+    <ClCompile Include="dwarf\CDWARFFormValue.cpp">
+      <Filter>dwarf</Filter>
+    </ClCompile>
+    <ClCompile Include="dwarf\CDWARFRangeTable.cpp">
+      <Filter>dwarf</Filter>
+    </ClCompile>
+    <ClCompile Include="base\Loadable.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="io\source_of_stream.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="io\stream_base.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="io\stream_file.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="io\stream_memory.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="io\substream.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\zip\SymbolsPack.cpp">
+      <Filter>utility\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="io\stream_dmemory.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\zip\ztools.cpp">
+      <Filter>utility\zip</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libiberty\dwarf2.def">
+      <Filter>libiberty</Filter>
+    </None>
+  </ItemGroup>
+</Project>
