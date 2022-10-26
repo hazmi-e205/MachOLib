@@ -42,12 +42,12 @@ namespace dwarf
 		bool		isEmpty() const;
 		bool		isCompileUnit() const;
 		const CDWARFFormValue* getFormBy(DW_AT attr) const;
-		bool		isInRange(t_uint64 addr, t_uint64 base_address_of_cu, const utility::CDWARFRangeResolver& range_resolver) const;
+		bool		isInRange(t_uint64 addr, t_uint64 base_address_of_cu, t_uint16 dwarf_version, const utility::CDWARFRangeResolver& range_resolver) const;
 		t_uint64	getObjectPointer(t_uint64 default_ = kINVALID_ADDRESS) const;
 		t_uint64	getSpecification(t_uint64 default_ = kINVALID_ADDRESS) const;
 		t_uint64	getAbstractOrigin(t_uint64 default_ = kINVALID_ADDRESS) const;
 		t_uint64	getLowPC(t_uint64 default_ = kINVALID_ADDRESS) const;
-		t_uint64	getHighPC(t_uint64 default_ = kINVALID_ADDRESS) const;
+		t_uint64	getHighPC(t_uint16 dwarf_version, t_uint64 default_ = kINVALID_ADDRESS) const;
 		t_uint64	getEnterPC(t_uint64 default_ = kINVALID_ADDRESS) const;
 		t_uint64	getCallLine(t_uint64 default_ = kINVALID_ADDRESS) const;
 		t_uint64	getCallFile(t_uint64 default_ = kINVALID_ADDRESS) const;

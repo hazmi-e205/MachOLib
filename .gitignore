@@ -1,0 +1,20 @@
+# project stuff
+
+*.vcxproj.user
+/project/.vs
+
+
+# output binaries
+
+/libs/MachOLib/Win32
+/libs/MachOLib/x64
+/libs/MachOLibWrapper/Win32
+/libs/MachOLibWrapper/x64
+/libs/unzip/Win32
+/libs/unzip/x64
+/libs/zlib/project/vs2008/x64
+/libs/zlib/project/vs2008/Win32
+/project/Win32
+/project/x64
+/project/iOSCrashLogTool/bin
+/project/iOSCrashLogTool/obj

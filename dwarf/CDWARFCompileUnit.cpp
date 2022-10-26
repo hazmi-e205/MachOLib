@@ -19,6 +19,7 @@ namespace dwarf
 		m_length(0),
 		m_version(0),
 		m_addrSize(0),
+		m_dwarf_format(0),
 		m_name(),
 		m_debugInfoEntry()
 	{
@@ -31,7 +32,24 @@ namespace dwarf
 		t_uint8 addrSize;
 		t_uint32 abbrOffset;
 		io::bstreamsize end = 0;
-		stream->t_read(m_length);
+		t_uint32 length;
+		stream->t_read(length);
+		
+		//Check section: "7.4 32-Bit and 64-Bit DWARF Formats" of the DWARF 4 Standard
+		//We haven't made the necessary changes to support the 64bit standard (but it shouldn't be needed since it should be used only for huge compilation units I believe)
+		if (length == 0xffffffffu)
+		{
+			//64bit format
+			stream->t_read(m_length);
+			m_dwarf_format = 64;
+			assert(false && "We don't support the 64bit format properly everywhere");
+			return false;
+		}
+		else
+		{
+			m_dwarf_format = 32;
+			m_length=length;
+		}
 		
 		end = stream->position() + m_length;
 		stream->t_read(version);
@@ -39,7 +57,7 @@ namespace dwarf
 		stream->t_read(addrSize);
 		m_version = static_cast<t_uint8>(version&0xf);
 		m_addrSize = static_cast<t_uint8>(addrSize&0xf);
-		if(m_version == 2 && (m_addrSize == 4 || m_addrSize == 8))
+		if(m_version >= 2 && m_version <= 4 && (m_addrSize == 4 || m_addrSize == 8))
 		{
 			t_uint32 depth = 0;
 			m_debugInfoEntry.clear();
@@ -133,7 +151,7 @@ namespace dwarf
 	{
 		return getDIEByOffset(absolute_die_offset);
 	}
-	t_uint32 CDWARFCompileUnit::getLength() const
+	t_uint64 CDWARFCompileUnit::getLength() const
 	{
 		return m_length;
 	}
@@ -144,6 +162,10 @@ namespace dwarf
 	t_uint8 CDWARFCompileUnit::getAddrSize() const
 	{
 		return m_addrSize;
+	}
+	t_uint8 CDWARFCompileUnit::getDwarfFromat() const
+	{
+		return m_dwarf_format;
 	}
 	t_uint32 CDWARFCompileUnit::getHeaderSize() const
 	{
@@ -383,7 +405,7 @@ namespace dwarf
 			int idx = std::distance(m_debugInfoEntry.begin(), i);
 #endif
 
-			if((*i).DIE.isInRange(address, m_base_address, range_resolver))
+			if((*i).DIE.isInRange(address, m_base_address, getVersion(), range_resolver))
 			{
 				ret.push_back(&(*i).DIE);
 			}
@@ -406,7 +428,7 @@ namespace dwarf
 				{
 					fullExtract(std::distance(begin(), i),abbr_table, debug_str, stream);
 				}
-				if((*i).DIE.isInRange(address, m_base_address, range_resolver))
+				if((*i).DIE.isInRange(address, m_base_address, getVersion(), range_resolver))
 				{
 					ret.push_back(std::distance(begin(), i));
 
@@ -420,7 +442,7 @@ namespace dwarf
 						{
 							if(fullExtract(*j,abbr_table, debug_str, stream))
 							{
-								if(info->isInRange(address, m_base_address, range_resolver))
+								if(info->isInRange(address, m_base_address, getVersion(), range_resolver))
 								{
 									ret.push_back(*j);
 								}

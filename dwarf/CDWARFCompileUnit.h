@@ -77,9 +77,10 @@ namespace dwarf
 													io::stream_base::ptr debug_str,
 													io::stream_base::ptr stream);
 		
-		t_uint32						getLength() const;
+		t_uint64						getLength() const;
 		t_uint16						getVersion() const;
 		t_uint8							getAddrSize() const;
+		t_uint8							getDwarfFromat() const;
 		t_uint32						getHeaderSize() const;
 		t_uint64						getBaseAddress() const;
 		t_uint64						getStmtList() const;
@@ -100,8 +101,9 @@ namespace dwarf
 	private:
 		t_uint64							m_base_address;
 		t_uint64							m_stmt_list;
-		t_uint32							m_length;
+		t_uint64							m_length;
 		t_uint8								m_version:4,m_addrSize:4;
+		t_uint8								m_dwarf_format; //spec section 7.4 32-Bit and 64-Bit DWARF Formats
 		std::string							m_name;
 		DIETable							m_debugInfoEntry;
 	};

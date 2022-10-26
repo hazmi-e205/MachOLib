@@ -21,6 +21,17 @@ namespace dwarf
 			eValueTypeCStr,
 			eValueTypeBlock
 		};
+		enum eFormClass
+		{
+			eFormClassInvalid = 0,
+			eFormClassAddress,
+			eFormClassBlock,
+			eFormClassConstant,
+			eFormClassExprloc,
+			eFormClassFlag,
+			eFormClassReference,
+			eFormClassString,
+		};
 	private:
 		typedef std::string			FormStringData;
 		typedef std::vector<char>	FormData;
@@ -52,9 +63,10 @@ namespace dwarf
 		CDWARFFormValue(const CDWARFFormValue& other);
 		CDWARFFormValue& operator = (const CDWARFFormValue& other);
 		~CDWARFFormValue();
+		eFormClass          formClass() const;
 		eValueType			type() const;
 		DW_FORM				form() const;
-		bool				parse(t_uint8 addr_size/*4 or 8*/,io::stream_base::ptr debug_str,io::stream_base::ptr stream);
+		bool				parse(t_uint8 addr_size/*4 or 8*/, t_uint8 dwarf_format /*32 or 64*/, t_uint16 dwarf_version,io::stream_base::ptr debug_str,io::stream_base::ptr stream);
 		/*not needed now*/
 		//FormStringData		asString() const;
 		/*not needed now*/
@@ -62,7 +74,7 @@ namespace dwarf
 		t_uint64			asUInt64() const;
 		t_int64				asInt64() const;
 
-		static bool			Skip(DW_FORM form,t_uint8 addr_size/*4 or 8*/,io::stream_base::ptr stream);
+		static bool			Skip(DW_FORM form,t_uint8 addr_size/*4 or 8*/, t_uint8 dwarf_format /*32 or 64*/, t_uint16 dwarf_version, io::stream_base::ptr stream);
 		static eValueType	ConvertFormToType(DW_FORM form,t_int32 addr_size,t_int32* osize);
 	private:
 		eValueType		install(eValueType type);

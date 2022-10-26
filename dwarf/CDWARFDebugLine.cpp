@@ -86,10 +86,13 @@ namespace dwarf
 	{
 		CDWARFPrologue oprologue;
 		{
+			unsigned char dummy_MaxOpsPerInstruction;
+
 			io::t_uint32& total_length = reinterpret_cast<io::t_uint32&>(oprologue.m_totalLength);
 			io::t_uint16& version = reinterpret_cast<io::t_uint16&>(oprologue.m_version);
 			io::t_uint32& prologue_length = reinterpret_cast<io::t_uint32&>(oprologue.m_prologueLength);
 			io::t_uint8& min_inst_length = reinterpret_cast<io::t_uint8&>(oprologue.m_minInstLength);
+			io::t_uint8& max_ops_per_instruction = reinterpret_cast<io::t_uint8&>(dummy_MaxOpsPerInstruction);
 			io::t_uint8& default_is_stmt = reinterpret_cast<io::t_uint8&>(oprologue.m_defaultIsStmt);
 			io::t_uint8& line_base = reinterpret_cast<io::t_uint8&>(oprologue.m_lineBase);
 			io::t_uint8& line_range = reinterpret_cast<io::t_uint8&>(oprologue.m_lineRange);
@@ -98,7 +101,7 @@ namespace dwarf
 
 			stream->t_read(total_length);
 			stream->t_read(version);
-			if(version != 2)
+			if(version < 2 || version > 4)
 			{ 
 				assert(false && "unsupported prologue version!!!");
 				return oprologue; 
@@ -107,6 +110,10 @@ namespace dwarf
 			macho::t_uint32 end_prologue = static_cast<macho::t_uint32>(stream->position()) + prologue_length;
 			assert((end_prologue < static_cast<macho::t_uint32>(stream->size())) && "invalid length of prologue!!!");
 			stream->t_read(min_inst_length);
+			if (version >= 4)
+			{
+				stream->t_read(max_ops_per_instruction);
+			}
 			stream->t_read(default_is_stmt);
 			stream->t_read(line_base);
 			stream->t_read(line_range);
@@ -221,7 +228,8 @@ namespace dwarf
 		const io::bstreamsize start_pos = stream->position();
 		m_prologue = CDWARFPrologue::ParsePrologue(stream);
 		CDWARFPrologue& prologue = m_prologue;
-		if(m_prologue.getVersion() == 2)
+		unsigned short version = m_prologue.getVersion();
+		if(version >= 2 && version <= 4)
 		{
 			ret = true;
 			unsigned int commands = 0;

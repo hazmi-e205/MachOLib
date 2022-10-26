@@ -16,6 +16,14 @@ const wchar_t CSearchMachO::kEXTENSION_OF_DYLIB[] = L".dylib";
 
 bool CSearchMachO::Search(const wchar_t* cpath,ISender& observer)
 {
+	auto TryReadCrashLog = [](const std::wstring& path, CMachOCrashLog& out_)
+	{
+		return ReadCrashLog(kEXTENSION_OF_CRASH_LOG, path, out_)
+			|| ReadCrashLog(kEXTENSION_OF_CRASH_LOG2, path, out_)
+			|| ReadCrashLogJson(kEXTENSION_OF_CRASH_LOG, path, out_)
+			|| ReadCrashLogJson(kEXTENSION_OF_CRASH_LOG2, path, out_);
+	};
+
 	unsigned int ret = 0;
 	if(cpath)
 	{
@@ -28,7 +36,7 @@ bool CSearchMachO::Search(const wchar_t* cpath,ISender& observer)
 		if((lpath.size() > 1) && IsCrashLog(lpath.back()))
 		{
 			CMachOCrashLog log;
-			if(ReadCrashLog(kEXTENSION_OF_CRASH_LOG,wpath,log) || ReadCrashLog(kEXTENSION_OF_CRASH_LOG2,wpath,log))
+			if(TryReadCrashLog(wpath, log))
 			{
 				observer.onFind(log);
 				++ret;
@@ -81,7 +89,7 @@ bool CSearchMachO::Search(const wchar_t* cpath,ISender& observer)
 					std::wstring path = current_folder + L'\\' + (*i);
 					CMachOCrashLog log;
 					CMachODyLib dylib;
-					if(IsCrashLog(path) && (ReadCrashLog(kEXTENSION_OF_CRASH_LOG, path, log) || ReadCrashLog(kEXTENSION_OF_CRASH_LOG2, path, log)))
+					if(IsCrashLog(path) && TryReadCrashLog(path, log))
 					{
 						TRACE("[CSearchMachO] ReadCrashLog path = %s",std::string(log.path().begin(),log.path().end()).c_str());
 						observer.onFind(log);
@@ -155,23 +163,28 @@ bool CSearchMachO::ReadCrashLog(const std::wstring& extension,const std::wstring
 			file.close();
 		}
 	}
-	else if(path.find(kEXTENSION_OF_CRASH_LOG2) != std::wstring::npos)
+	return ret;
+}
+bool CSearchMachO::ReadCrashLogJson(const std::wstring& extension, const std::wstring& path, CMachOCrashLog& out_)
+{
+	bool ret = false, error = true;
+	if (path.find(extension) != std::wstring::npos)
 	{
-		io::stream_file file(path.c_str(),true,false,error);
-		if(!error && (file.size() > 0))
+		io::stream_file file(path.c_str(), true, false, error);
+		if (!error && (file.size() > 0))
 		{
 			std::vector<char> buffer(static_cast<unsigned int>(file.size()));
-			if(file.read(&buffer[0],file.size()) > 0)
+			if (file.read(&buffer[0], file.size()) > 0)
 			{
-				std::wstring document(buffer.begin(),buffer.end());
-				if(document.find(kEXTENSION_OF_CRASH_LOG2) != std::wstring::npos)
+				std::wstring document(buffer.begin(), buffer.end());
+				if (document.find(L"\"crashReporterKey\"") != std::string::npos)
 				{
-					out_ = CMachOCrashLog::Parse(document);
+					out_ = CMachOCrashLog::ParseJson(document);
 					std::wstring::size_type name_it = path.find_last_of(L"/\\");
 					out_.name() = L"unknown";
 					out_.path() = path;
-					if(name_it != std::wstring::npos) {
-						out_.name() = path.substr(name_it+1);
+					if (name_it != std::wstring::npos) {
+						out_.name() = path.substr(name_it + 1);
 					}
 					ret = true;
 				}

@@ -52,6 +52,7 @@ public:
 	static const wchar_t kTOKEN_INCIDENT_IDENTIFIER[];
 	static const wchar_t kTOKEN_EXCEPTION_TYPE[];
 	static const wchar_t kTOKEN_EXCEPTION_CODES[];
+	static const wchar_t kTOKEN_Path[];
 	static const wchar_t kCRASH_INVALID_ADDRESS[];
 	static const wchar_t kCRASH_ABNORMAL_EXIT[];
 	static const wchar_t kCRASH_ADDRESS_NOT_EXIST_OR_NOT_ALIGNED[];
@@ -70,9 +71,10 @@ private:
 	unsigned long long int				m_img_end_addr;
 	std::map<std::wstring,std::wstring>	m_linkLibWithUUID;
 	eCrashType							m_type;
+	bool								m_isJsonFile;
 public:
 	CMachOCrashLog();
-	CMachOCrashLog(const std::wstring& path, const std::wstring& name, const std::wstring& uuid, const std::wstring& id, const std::wstring& report_id,const unsigned long long int& addr);
+	CMachOCrashLog(const std::wstring& path, const std::wstring& name, const std::wstring& uuid, const std::wstring& id, const std::wstring& report_id,const unsigned long long int& addr, bool isJson);
 
 	std::wstring& path();
 	const std::wstring& path() const;
@@ -89,12 +91,15 @@ public:
 	unsigned long long int end_addr() const;
 	const std::map<std::wstring,std::wstring>& links() const;
 	eCrashType type() const;
+	bool isJsonFile() const;
+	bool& isJsonFile();
 public:
 	std::string content;
 
 
 	static CMachOCrashLog Parse(const std::wstring& report);
-	static bool ParseImagesLine(const wchar_t* report,unsigned long long int& oaddr,unsigned long long int& oend_addr,std::wstring& app_name, std::wstring& app_uuid);
+	static CMachOCrashLog ParseJson(const std::wstring& report);
+	static bool ParseImagesLine(const wchar_t* report,unsigned long long int& oaddr,unsigned long long int& oend_addr,std::wstring& app_name, std::wstring& app_uuid, std::wstring& oapp_path);
 	static eCrashType ParseType(const std::wstring& report);
 };
 

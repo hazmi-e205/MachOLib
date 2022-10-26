@@ -36,7 +36,7 @@ namespace dwarf
 					t_int32 size = -1;
 					const CDWARFAbbreviationTable::CDWARFAttribute& attr = decl->getAttributeAt(i);
 					m_values.push_back(std::make_pair(attr.getAttribute(), CDWARFFormValue(attr.getForm())));
-					ret_code = m_values.back().second.parse(unit.getAddrSize(),debug_str,stream);
+					ret_code = m_values.back().second.parse(unit.getAddrSize(),unit.getDwarfFromat(), unit.getVersion(),debug_str,stream);
 				}
 			}
 		}
@@ -64,7 +64,7 @@ namespace dwarf
 				for(t_uint32 i = 0; i < count && ret_code; ++i)
 				{
 					const CDWARFAbbreviationTable::CDWARFAttribute& attr = decl->getAttributeAt(i);
-					CDWARFFormValue::Skip(attr.getForm(),unit.getAddrSize(),stream);
+					CDWARFFormValue::Skip(attr.getForm(),unit.getAddrSize(),unit.getDwarfFromat(), unit.getVersion(), stream);
 				}
 			}
 		}
@@ -96,7 +96,7 @@ namespace dwarf
 						t_int32 size = -1;
 						const CDWARFAbbreviationTable::CDWARFAttribute& attr = decl->getAttributeAt(i);
 						m_values.push_back(std::make_pair(attr.getAttribute(), CDWARFFormValue(attr.getForm())));
-						ret_code = m_values.back().second.parse(unit.getAddrSize(),debug_str,stream);
+						ret_code = m_values.back().second.parse(unit.getAddrSize(),unit.getDwarfFromat(), unit.getVersion(),debug_str,stream);
 						assert(ret_code);
 					}
 				}
@@ -105,7 +105,7 @@ namespace dwarf
 					for(t_uint32 i = 0; i < count && ret_code; ++i)
 					{
 						const CDWARFAbbreviationTable::CDWARFAttribute& attr = decl->getAttributeAt(i);
-						ret_code = CDWARFFormValue::Skip(attr.getForm(),unit.getAddrSize(),stream);
+						ret_code = CDWARFFormValue::Skip(attr.getForm(),unit.getAddrSize(),unit.getDwarfFromat(), unit.getVersion(),stream);
 						assert(ret_code);
 					}
 				}
@@ -144,10 +144,10 @@ namespace dwarf
 		}
 		return ret;
 	}
-	bool CDWARFDebugInfoEntry::isInRange(t_uint64 addr, t_uint64 base_address_of_cu, const utility::CDWARFRangeResolver& range_resolver) const
+	bool CDWARFDebugInfoEntry::isInRange(t_uint64 addr, t_uint64 base_address_of_cu, t_uint16 dwarf_version, const utility::CDWARFRangeResolver& range_resolver) const
 	{
 		 
-		t_uint64 hipc = getHighPC();
+		t_uint64 hipc = getHighPC(dwarf_version);
 		t_uint64 lopc = getLowPC();
 		bool ret = false;
 		if(hipc == kINVALID_ADDRESS || lopc == kINVALID_ADDRESS)
@@ -175,10 +175,42 @@ namespace dwarf
 		const CDWARFFormValue* form = getFormBy(DW_AT_low_pc);
 		return form?(form->asUInt64()):default_;
 	}
-	t_uint64 CDWARFDebugInfoEntry::getHighPC(t_uint64 default_) const
+	t_uint64 CDWARFDebugInfoEntry::getHighPC(t_uint16 dwarf_version, t_uint64 default_) const
 	{
 		const CDWARFFormValue* form = getFormBy(DW_AT_high_pc);
-		return form?(form->asUInt64()):default_;
+		if (!form)
+		{
+			return default_;
+		}
+		//According to section "2.17.2 Contiguous Address Range" of the DWARF 4 standrard
+		// If the value of the DW_AT_high_pc is of class address, it is an address, 
+		// but if it is of class constant it is an offset from the DW_AT_low_pc
+		if (dwarf_version >= 4)
+		{
+			switch(form->formClass())
+			{
+			case CDWARFFormValue::eFormClassConstant:
+				{
+					t_uint64 low = getLowPC();
+					if (low == kINVALID_ADDRESS)
+					{
+						return default_;
+					}
+					return low + form->asUInt64();
+				}
+			case CDWARFFormValue::eFormClassAddress:
+				{
+					return form->asUInt64();
+				}
+			default:
+				{
+					assert(false && "Unsupported form class");
+					return default_;
+				}
+			}
+			
+		}
+		return form->asUInt64();
 	}
 	t_uint64 CDWARFDebugInfoEntry::getEnterPC(t_uint64 default_) const
 	{

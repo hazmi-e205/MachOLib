@@ -320,7 +320,39 @@ namespace dwarf
 	{
 		return static_cast<DW_FORM>(m_type);
 	}
-	bool CDWARFFormValue::parse(t_uint8 addr_size/*4 or 8*/,io::stream_base::ptr debug_str,io::stream_base::ptr stream)
+	CDWARFFormValue::eFormClass CDWARFFormValue::formClass() const
+	{
+		switch(m_type)
+		{
+			case DW_FORM_addr: return eFormClassAddress;
+			case DW_FORM_block2: return eFormClassBlock;
+			case DW_FORM_block4: return eFormClassBlock;
+			case DW_FORM_data2: return eFormClassConstant;
+			case DW_FORM_data4: return eFormClassConstant;
+			case DW_FORM_data8: return eFormClassConstant;
+			case DW_FORM_string: return eFormClassString;
+			case DW_FORM_block: return eFormClassBlock;
+			case DW_FORM_block1: return eFormClassBlock;
+			case DW_FORM_data1: return eFormClassConstant;
+			case DW_FORM_flag: return eFormClassFlag;
+			case DW_FORM_sdata: return eFormClassConstant;
+			case DW_FORM_strp: return eFormClassString;
+			case DW_FORM_udata: return eFormClassConstant;
+			case DW_FORM_ref_addr: return eFormClassReference;
+			case DW_FORM_ref1: return eFormClassReference;
+			case DW_FORM_ref2: return eFormClassReference;
+			case DW_FORM_ref4: return eFormClassReference;
+			case DW_FORM_ref8: return eFormClassReference;
+			case DW_FORM_ref_udata: return eFormClassReference;
+			case DW_FORM_exprloc: return eFormClassExprloc;
+			case DW_FORM_flag_present: return eFormClassFlag;
+			case DW_FORM_ref_sig8: return eFormClassReference;
+		}
+		assert(false);
+		return  eFormClassInvalid;
+	}
+
+	bool CDWARFFormValue::parse(t_uint8 addr_size/*4 or 8*/, t_uint8 dwarf_format /*32 or 64*/, t_uint16 dwarf_version, io::stream_base::ptr debug_str,io::stream_base::ptr stream)
 	{
 		bool ret = true;
 		bool indirect = false;
@@ -451,13 +483,27 @@ namespace dwarf
 				{
 					t_uint32 addr32 = 0;
 					t_uint64 addr64 = 0;
-					if(addr_size == 4) { 
-						stream->t_read(addr32);
-						m_storage.un.uval = addr32;
+					if (dwarf_version > 2)
+					{
+						if (dwarf_format == 32) {
+							stream->t_read(addr32);
+							m_storage.un.uval = addr32;
+						}
+						else {
+							stream->t_read(addr64);
+							m_storage.un.uval = addr64;
+						}
 					}
-					else {
-						stream->t_read(addr64);
-						m_storage.un.uval = addr64;
+					else
+					{
+						if (addr_size == 4) {
+							stream->t_read(addr32);
+							m_storage.un.uval = addr32;
+						}
+						else {
+							stream->t_read(addr64);
+							m_storage.un.uval = addr64;
+						}
 					}
 					break;
 				}
@@ -552,7 +598,7 @@ namespace dwarf
 		}
 		return ret;
 	}
-	bool CDWARFFormValue::Skip(DW_FORM form,t_uint8 addr_size/*4 or 8*/,io::stream_base::ptr stream)
+	bool CDWARFFormValue::Skip(DW_FORM form,t_uint8 addr_size/*4 or 8*/, t_uint8 dwarf_format /*32 or 64*/, t_uint16 dwarf_version, io::stream_base::ptr stream)
 	{
 		bool ret = true;
 		bool indirect = false;
@@ -657,7 +703,14 @@ namespace dwarf
 				}
 			case DW_FORM_ref_addr:
 				{
-					stream->seek(stream->position() + addr_size);
+					if (dwarf_version > 2)
+					{
+						stream->seek(stream->position() + dwarf_format/8);
+					}
+					else
+					{
+						stream->seek(stream->position() + addr_size);
+					}
 					break;
 				}
 			case DW_FORM_ref1:
