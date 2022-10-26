@@ -1,31 +1,16 @@
-Gameloft branch of the ios crashlog tool from this page: https://sourceforge.net/p/ioscrashlogstool/
-
-This tool allows for quick and easy desymbolication of ios crashes on windows.
+This tool allows for quick and easy desymbolication of ios crashes on windows with fixes by Boyan Spasov.
 
 ##### Feature highlights:
 * Batch desymbolication
 * "Analyze inlined subroutines" option, which shows info about the the inlined functions in the callstack
 * No mac required
 
-# Build Instructions
-The solution file is in: \project\iOSCrashLogTool.sln
-1. Open the solution
-2. Make sure that iOSCrashLogTool is set as the startup project
-3. Choose the appropriate platform (x86 or x64)
-4. Build
-
 # New changelog:
-v1.4.1.0 changes:
 * Fix symbolicating crashes that have main module that is not first in the Binary Images list.
   This fixes crashes from Unity in particular
   (thanks to Yaroslav Kovtun)
 * fix incorrect colorization for non json crashlogs
-
-v1.4.0.0 changes:
-* added support for apple's new json crash format
-
-v1.3.0.0 changes  
-* First gameloft internal version
+* added support for apple's new json crash format 
 * 64bit executable
 * partial support for DWARF3 and DWARF4
 * fixed file and line numbers not showing on crashes where DWARF3 or DWARF4 are used in the dsym
