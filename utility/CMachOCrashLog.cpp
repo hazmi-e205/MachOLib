@@ -1,7 +1,7 @@
 #include "CMachOCrashLog.h"
 #include <macho/CFAT.h>
 #include <algorithm>
-#include <rapidjson/document.h>
+//#include <rapidjson/document.h>
 
 const wchar_t CMachOCrashLog::kTOKEN_BINARY_IMAGES[] = L"Binary Images:";
 const wchar_t CMachOCrashLog::kTOKEN_INCIDENT_IDENTIFIER[] = L"Incident Identifier: ";
@@ -188,116 +188,116 @@ bool& CMachOCrashLog::isJsonFile()
 {
 	return m_isJsonFile;
 }
-CMachOCrashLog CMachOCrashLog::ParseJson(const std::wstring& report)
-{
-	CMachOCrashLog ret;
-	rapidjson::MemoryStream ms(reinterpret_cast<const char*>(report.c_str()), report.size()*sizeof(std::wstring::value_type));
-	rapidjson::EncodedInputStream<rapidjson::UTF16LE<>, rapidjson::MemoryStream> is(ms);
+//CMachOCrashLog CMachOCrashLog::ParseJson(const std::wstring& report)
+//{
+//    CMachOCrashLog ret;
+//    rapidjson::MemoryStream ms(reinterpret_cast<const char*>(report.c_str()), report.size()*sizeof(std::wstring::value_type));
+//    rapidjson::EncodedInputStream<rapidjson::UTF16LE<>, rapidjson::MemoryStream> is(ms);
 	
-	rapidjson::GenericDocument<rapidjson::UTF16LE<>> document;
-	do
-	{
-		document.ParseStream<rapidjson::kParseStopWhenDoneFlag, rapidjson::UTF16LE<> >(is);
-		auto err = document.GetParseError();
-		if (err == rapidjson::kParseErrorNone)
-		{
-			if (!document.HasMember(L"crashReporterKey"))
-			{
-				continue;
-			}
-			break;
-		}
-		else if (err == rapidjson::kParseErrorDocumentRootNotSingular)
-		{
-			continue;
-		}
-		else 
-		{
-			return ret;
-		}
-	}
-	while(true);
+//    rapidjson::GenericDocument<rapidjson::UTF16LE<>> document;
+//    do
+//    {
+//        document.ParseStream<rapidjson::kParseStopWhenDoneFlag, rapidjson::UTF16LE<> >(is);
+//        auto err = document.GetParseError();
+//        if (err == rapidjson::kParseErrorNone)
+//        {
+//            if (!document.HasMember(L"crashReporterKey"))
+//            {
+//                continue;
+//            }
+//            break;
+//        }
+//        else if (err == rapidjson::kParseErrorDocumentRootNotSingular)
+//        {
+//            continue;
+//        }
+//        else
+//        {
+//            return ret;
+//        }
+//    }
+//    while(true);
 
-	ret.m_isJsonFile = true;
+//    ret.m_isJsonFile = true;
 
 	
 
-	ret.id() = document[L"incident"].GetString();
+//    ret.id() = document[L"incident"].GetString();
 
-	ret.id() = ReadJsonString(document, L"incident");
+//    ret.id() = ReadJsonString(document, L"incident");
 	
-	std::wstring procPath = ReadJsonString(document, L"procPath");
+//    std::wstring procPath = ReadJsonString(document, L"procPath");
 	
-	/* usedImages example:
-	"usedImages" : [
-		  {
-			"source" : "P",
-			"arch" : "arm64",
-			"base" : 6859857920,
-			"size" : 221184,
-			"uuid" : "78e77e28-74d0-371a-a246-6d41374ba19a",
-			"path" : "\/usr\/lib\/libobjc.A.dylib",
-			"name" : "libobjc.A.dylib"
-		  }
-	]
-	*/	
-	auto& images = document[L"usedImages"];
-	bool hasMain = false;
-	for (auto& image : images.GetArray())
-	{
-		if (ReadJsonString(image, L"path") == procPath)
-		{
-			assert(!hasMain);
-			hasMain = true;
-			ret.m_img_addr = image[L"base"].GetInt64();
-			ret.m_img_end_addr = ret.m_img_addr + image[L"size"].GetInt64();
-			ret.m_uuid = MakeUppercase(DropDashes(ReadJsonString(image, L"uuid")));
-			ret.m_image_name = ReadJsonString(image, L"name");
-		}
-		else
-		{
-			std::wstring uuid = MakeUppercase(DropDashes(ReadJsonString(image, L"uuid")));
-			std::wstring name = ReadJsonString(image, L"name");
-			ret.m_linkLibWithUUID.insert(std::make_pair(name, uuid));
-		}
-	}
-	ret.m_type = eCrashTypeUnknown;
+//    /* usedImages example:
+//    "usedImages" : [
+//          {
+//            "source" : "P",
+//            "arch" : "arm64",
+//            "base" : 6859857920,
+//            "size" : 221184,
+//            "uuid" : "78e77e28-74d0-371a-a246-6d41374ba19a",
+//            "path" : "\/usr\/lib\/libobjc.A.dylib",
+//            "name" : "libobjc.A.dylib"
+//          }
+//    ]
+//    */
+//    auto& images = document[L"usedImages"];
+//    bool hasMain = false;
+//    for (auto& image : images.GetArray())
+//    {
+//        if (ReadJsonString(image, L"path") == procPath)
+//        {
+//            assert(!hasMain);
+//            hasMain = true;
+//            ret.m_img_addr = image[L"base"].GetInt64();
+//            ret.m_img_end_addr = ret.m_img_addr + image[L"size"].GetInt64();
+//            ret.m_uuid = MakeUppercase(DropDashes(ReadJsonString(image, L"uuid")));
+//            ret.m_image_name = ReadJsonString(image, L"name");
+//        }
+//        else
+//        {
+//            std::wstring uuid = MakeUppercase(DropDashes(ReadJsonString(image, L"uuid")));
+//            std::wstring name = ReadJsonString(image, L"name");
+//            ret.m_linkLibWithUUID.insert(std::make_pair(name, uuid));
+//        }
+//    }
+//    ret.m_type = eCrashTypeUnknown;
 
-	auto& exceptionInfo = document[L"exception"];
-	ret.m_type = DeduceTypeFromExceptionTypeString(MakeUppercase(ReadJsonString(exceptionInfo, L"signal")));
-	if (ret.m_type == eCrashTypeUnknown)
-	{
-		ret.m_type = DeduceTypeFromExceptionTypeString(MakeUppercase(ReadJsonString(exceptionInfo, L"type")));	
-	}
-	if (ret.m_type == eCrashTypeUnknown)
-	{	
-		if (document.HasMember(L"termination"))
-		{
-			auto& terminationInfo = document[L"termination"];
-			for (auto& reason : terminationInfo[L"reasons"].GetArray())
-			{
-				ret.m_type = DeduceTypeFromExceptionCode(reason.GetString());
-				if (ret.m_type != eCrashTypeUnknown)
-				{
-					break;
-				}
-			}
-		}
-	}
+//    auto& exceptionInfo = document[L"exception"];
+//    ret.m_type = DeduceTypeFromExceptionTypeString(MakeUppercase(ReadJsonString(exceptionInfo, L"signal")));
+//    if (ret.m_type == eCrashTypeUnknown)
+//    {
+//        ret.m_type = DeduceTypeFromExceptionTypeString(MakeUppercase(ReadJsonString(exceptionInfo, L"type")));
+//    }
+//    if (ret.m_type == eCrashTypeUnknown)
+//    {
+//        if (document.HasMember(L"termination"))
+//        {
+//            auto& terminationInfo = document[L"termination"];
+//            for (auto& reason : terminationInfo[L"reasons"].GetArray())
+//            {
+//                ret.m_type = DeduceTypeFromExceptionCode(reason.GetString());
+//                if (ret.m_type != eCrashTypeUnknown)
+//                {
+//                    break;
+//                }
+//            }
+//        }
+//    }
 
-	// TODO handling for these two cases:
-	//Backup deductions
-	//if (report.find(L"Last Exception Backtrace:") != std::wstring::npos)
-	//{
-	//	otype = eCrashTypeUnhandledException;
-	//}
-	//else if (report.find(L"Crashed:") != std::wstring::npos)
-	//{
-	//	otype = eCrashTypeUnknownWithCrashedThread;
-	//}
+//    // TODO handling for these two cases:
+//    //Backup deductions
+//    //if (report.find(L"Last Exception Backtrace:") != std::wstring::npos)
+//    //{
+//    //	otype = eCrashTypeUnhandledException;
+//    //}
+//    //else if (report.find(L"Crashed:") != std::wstring::npos)
+//    //{
+//    //	otype = eCrashTypeUnknownWithCrashedThread;
+//    //}
 
-	return ret;
-}
+//    return ret;
+//}
 
 CMachOCrashLog CMachOCrashLog::Parse(const std::wstring& report)
 {

@@ -98,7 +98,7 @@ public:
 
 
 	static CMachOCrashLog Parse(const std::wstring& report);
-	static CMachOCrashLog ParseJson(const std::wstring& report);
+//	static CMachOCrashLog ParseJson(const std::wstring& report);
 	static bool ParseImagesLine(const wchar_t* report,unsigned long long int& oaddr,unsigned long long int& oend_addr,std::wstring& app_name, std::wstring& app_uuid, std::wstring& oapp_path);
 	static eCrashType ParseType(const std::wstring& report);
 };
